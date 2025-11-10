@@ -7,6 +7,20 @@ class DetailScreen extends StatelessWidget {
 
   const DetailScreen({super.key, required this.exam});
 
+  String _getTimeRemaining() {
+    DateTime now = DateTime.now();
+    Duration difference = exam.date.difference(now);
+
+    if (difference.isNegative) {
+      return 'Испитот помина';
+    }
+
+    int days = difference.inDays;
+    int hours = difference.inHours.remainder(24);
+
+    return '$days дена, $hours часа';
+  }
+
   @override
   Widget build(BuildContext context) {
     bool passed = exam.date.compareTo(DateTime.timestamp()) < 0;
@@ -40,6 +54,7 @@ class DetailScreen extends StatelessWidget {
                 ),
               ],
             ),
+            Text('Време до испит ${_getTimeRemaining()}'),
             Row(
               children: [
                 Icon(Icons.access_time),

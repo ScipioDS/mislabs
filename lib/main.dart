@@ -21,6 +21,13 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key, required this.title});
+  final String title;
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
 
 class _MyHomePageState extends State<MyHomePage> {
   // Hardcoded list of exams
@@ -83,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
     double screenHeight = MediaQuery.of(context).size.height;
 
     double containerWidth = screenWidth * 0.9;
-    double containerHeight = screenHeight * 0.15;
+    double containerHeight = screenHeight * 0.2;
 
     return Scaffold(
       appBar: AppBar(
@@ -115,7 +122,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
                 child: SizedBox(
                   width: containerWidth,
-                  height: containerHeight,
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Column(
@@ -159,6 +165,33 @@ class _MyHomePageState extends State<MyHomePage> {
           );
         },
       ),
+      floatingActionButton: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.primary,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(
+              Icons.list_alt,
+              color: Colors.white,
+              size: 20,
+            ),
+            const SizedBox(width: 8),
+            Text(
+              'Вкупно испити: ${exams.length}',
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
-}}
+}
